@@ -20,8 +20,12 @@ import { verifyExistence, compute } from "../../logic/calculator";
 
 const Calc = (props) => {
   const [currentOperation, setCurrentOperation] = useState(" ");
-  const [lastNumber, setLastNumber] = useState(null)
+  const [lastNumber, setLastNumber] = useState(0)
   const [currentNumber, setCurrentNumber] = useState(null)
+
+  function handleOperation (operator) {
+
+  }
 
   const buttonsRender = buttons.map((button, index) => {
     if (button.type === "number" || button.type === "aux") {
@@ -44,7 +48,7 @@ const Calc = (props) => {
       return (
         <OperatorButton
           key={index}
-          onClick={() => setCurrentOperation(compute(currentNumber, button.value))}
+          onClick={ () => handleOperation(button.value) }
         >
           {" "}
           <span>{button.content}</span>{" "}
