@@ -1,3 +1,5 @@
+import { squareRoot } from "./calculator";
+
 export const buttons = [
   {
     content: "C",
@@ -8,18 +10,18 @@ export const buttons = [
   {
     content: "⌫",
     value: "delete",
-    type: "operator",
+    type: "erase",
     logic: "",
   },
   {
     content: "√",
-    value: "V",
+    value: "squareRoot",
     type: "operator",
-    logic: "",
+    logic: squareRoot,
   },
   {
     content: "÷",
-    value: "/",
+    value: "divided",
     type: "operator",
     logic: "",
   },
@@ -43,7 +45,7 @@ export const buttons = [
   },
   {
     content: "x",
-    value: "*",
+    value: "times",
     type: "operator",
     logic: "",
   },
@@ -67,7 +69,7 @@ export const buttons = [
   },
   {
     content: "-",
-    value: "-",
+    value: "minus",
     type: "operator",
     logic: "",
   },
@@ -91,7 +93,7 @@ export const buttons = [
   },
   {
     content: "+",
-    value: "+",
+    value: "plus",
     type: "operator",
     logic: "",
   },
@@ -110,12 +112,12 @@ export const buttons = [
   {
     content: ".",
     value: ".",
-    type: "aux",
+    type: "number",
     logic: "",
   },
   {
     content: "=",
-    value: "=",
+    value: "equal",
     type: "equal",
     logic: "",
   },

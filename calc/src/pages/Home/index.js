@@ -1,82 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   CalcWrapper,
   Calculator,
   CalcScreen,
   HeaderLogo,
   Header,
-  ButtonContainer,
-  Button,
-  OperatorButton,
-  EqualButton,
   Operation,
   Result,
 } from "./style";
-import { buttons } from "../../logic/buttonsArray";
 import logo from "../../img/e.Mix - Logo.svg";
-import { verifyExistence, compute } from "../../logic/calculator";
-
-//setCurrentOperation(data.substr(0, data.length -1))
+import Buttons from "../../components/Buttons";
+import { connect } from "react-redux";
 
 const Calc = (props) => {
-  const [currentOperation, setCurrentOperation] = useState(" ");
-  const [lastNumber, setLastNumber] = useState(0)
-  const [currentNumber, setCurrentNumber] = useState(null)
 
-  function handleOperation (operator) {
+  const [showResult, setShowResult] = useState('')
 
-  }
-
-  const buttonsRender = buttons.map((button, index) => {
-    if (button.type === "number" || button.type === "aux") {
-      return (
-        <Button
-          type={button.type === "number" ? 700 : 100}
-          key={index}
-          onClick={() =>
-            setCurrentNumber(
-              currentNumber + verifyExistence(currentNumber, button.value)
-            )
-          }
-        >
-          {" "}
-          <span>{button.content}</span>{" "}
-        </Button>
-      );
+  useEffect(() => {
+    console.log("useeffect home", props.operator)
+    if(props.result && !props.currentNumber){
+      return setShowResult(props.result)
     }
-    if (button.type === "operator") {
-      return (
-        <OperatorButton
-          key={index}
-          onClick={ () => handleOperation(button.value) }
-        >
-          {" "}
-          <span>{button.content}</span>{" "}
-        </OperatorButton>
-      ); 
+    if(props.operator === "squareRoot"){
+      return setShowResult(props.lastNumber)
     }
-    if (button.type === "clear") {
-      return (
-        <OperatorButton
-          key={index}
-          onClick={() => setCurrentOperation("") & setCurrentNumber("")}
-        >
-          {" "}
-          <span>{button.content}</span>{" "}
-        </OperatorButton>
-      );
-    }
-    return (
-      <EqualButton
-        key={index}
-        onClick={() => setCurrentOperation(button.content)}
-      >
-        {" "}
-        <span>{button.content}</span>{" "}
-      </EqualButton>
-    );
-  });
+      return  setShowResult(props.currentNumber)
 
+
+  }, [props.result, props.currentNumber, props.lastNumber, props.operator])
+
+  // props.result ? setShowResult(props.result) : setShowResult(props.currentNumber)
+
+  
   return (
     <CalcWrapper>
       <Calculator>
@@ -84,13 +39,23 @@ const Calc = (props) => {
           <HeaderLogo src={logo} />
         </Header>
         <CalcScreen>
-          <Operation> {currentOperation} </Operation>
-          <Result> {currentNumber} </Result>
+          {props.zeroDivision? <span>Não é possível realizar divisão por zero</span> : ""}
+          <Operation> {props.currentOperation} </Operation>
+          <Result> {showResult} </Result>
         </CalcScreen>
-        <ButtonContainer>{buttonsRender}</ButtonContainer>
+        <Buttons />
       </Calculator>
     </CalcWrapper>
   );
 };
 
-export default Calc;
+
+const mapStateToProps = (state) => ({
+  currentNumber: state.calculator.currentNumber,
+  result: state.calculator.result,
+  currentOperation: state.calculator.currentOperation,
+  zeroDivision: state.calculator.zeroDivision
+});
+
+
+export default connect(mapStateToProps, null)(Calc);

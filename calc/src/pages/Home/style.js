@@ -47,15 +47,20 @@ export const CalcScreen = styled.div`
   align-items: flex-end;
   text-align: right;
   padding: 20px 20px 0 0;
+  overflow: auto;
 `;
 
 export const Result = styled.span`
   font-size: 35px;
   font-weight: 700;
+  width: 100%;
+  overflow-x: auto;
 `;
 
 export const Operation = styled.span`
   font-size: 20px;
+  width: 100%;
+  overflow-x: auto;
 `;
 
 export const ButtonContainer = styled.div`
@@ -77,7 +82,7 @@ export const Button = styled.div`
   text-align: center;
   span {
     font-size: 23px;
-    font-weight: ${props => props.type};
+    font-weight: ${(props) => props.type};
   }
   cursor: pointer;
   &:hover {
