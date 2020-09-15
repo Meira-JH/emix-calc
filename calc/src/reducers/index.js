@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import calculator from './calculator'
+import calculatorRefactor from './calculatorRefactor'
 
 const rootReducer = combineReducers({
-    calculator,
+    calculatorRefactor
   });
 
 export default rootReducer

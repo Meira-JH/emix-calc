@@ -3,14 +3,14 @@ import { squareRoot } from "./calculator";
 export const buttons = [
   {
     content: "C",
-    value: "C",
-    type: "clear",
+    value: "clear",
+    type: "delete",
     logic: "",
   },
   {
     content: "⌫",
-    value: "delete",
-    type: "erase",
+    value: "erase",
+    type: "delete",
     logic: "",
   },
   {
@@ -98,8 +98,8 @@ export const buttons = [
     logic: "",
   },
   {
-    content: "+-",
-    value: "+-",
+    content: "+/-",
+    value: "negativePositive",
     type: "aux",
     logic: "",
   },
